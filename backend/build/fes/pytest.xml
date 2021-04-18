@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.311" timestamp="2021-03-21T15:07:00.596167" hostname="hamebook"><testcase classname="fes" name="" time="0.000"><error message="collection failure">/usr/local/lib/python3.8/site-packages/pluggy/hooks.py:286: in __call__
+    return self._hookexec(self, self.get_hookimpls(), kwargs)
+/usr/local/lib/python3.8/site-packages/pluggy/manager.py:93: in _hookexec
+    return self._inner_hookexec(hook, methods, kwargs)
+/usr/local/lib/python3.8/site-packages/pluggy/manager.py:84: in &lt;lambda&gt;
+    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+/usr/local/lib/python3.8/site-packages/_pytest/python.py:200: in pytest_collect_file
+    module: Module = ihook.pytest_pycollect_makemodule(path=path, parent=parent)
+/usr/local/lib/python3.8/site-packages/pluggy/hooks.py:286: in __call__
+    return self._hookexec(self, self.get_hookimpls(), kwargs)
+/usr/local/lib/python3.8/site-packages/pluggy/manager.py:93: in _hookexec
+    return self._inner_hookexec(hook, methods, kwargs)
+/usr/local/lib/python3.8/site-packages/pluggy/manager.py:84: in &lt;lambda&gt;
+    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/launch_testing/pytest/hooks.py:131: in pytest_pycollect_makemodule
+    entrypoint = find_launch_test_entrypoint(path)
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/launch_testing/pytest/hooks.py:125: in find_launch_test_entrypoint
+    return getattr(path.pyimport(), 'generate_test_description', None)
+/usr/local/lib/python3.8/site-packages/py/_path/local.py:704: in pyimport
+    __import__(modname)
+fes/rclpy/rclpy/action/__init__.py:15: in &lt;module&gt;
+    from .client import ActionClient  # noqa: F401
+fes/rclpy/rclpy/action/client.py:23: in &lt;module&gt;
+    from rclpy.executors import await_or_execute
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/executors.py:36: in &lt;module&gt;
+    from rclpy.client import Client
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/client.py:22: in &lt;module&gt;
+    from rclpy.impl.implementation_singleton import rclpy_implementation as _rclpy
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/impl/implementation_singleton.py:31: in &lt;module&gt;
+    rclpy_implementation = _import('._rclpy')
+/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/impl/__init__.py:22: in _import
+    return importlib.import_module(name, package='rclpy')
+/usr/local/Cellar/python@3.8/3.8.8_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+E   ImportError: dlopen(/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/_rclpy.cpython-38-darwin.so, 2): Library not loaded: @rpath/librclpy_common.dylib
+E     Referenced from: /Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/_rclpy.cpython-38-darwin.so
+E     Reason: image not found
+E   The C extension '/Users/hame/Tools/ros2_foxy/ros2-osx/lib/python3.8/site-packages/rclpy/_rclpy.cpython-38-darwin.so' failed to be imported while being present on the system. Please refer to 'https://index.ros.org/doc/ros2/Troubleshooting/Installation-Troubleshooting/#import-failing-even-with-library-present-on-the-system' for possible solutions</error></testcase></testsuite></testsuites>

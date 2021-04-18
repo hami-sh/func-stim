@@ -1,0 +1,14 @@
+# Features
+[] battery
+[*] change mode
+  [] low_level (0) [single run]
+    [*] pulse
+    [] ? custom pulse
+  [] mid_level (1) [run for a set period, start/stop]
+    [] set_pulse
+    [] run [for a total_ms]
+    [] start / update / end
+
+# Stuff I need help with (jack plz!)
+[] clicking on the switch seems to take up the whole div
+[] Layout!
