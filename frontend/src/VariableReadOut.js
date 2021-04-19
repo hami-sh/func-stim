@@ -87,6 +87,7 @@ class VariableReadOut extends React.Component  {
                           step={this.props.step}
                           min={this.props.min}
                           max={this.props.max}
+                          valueLabelDisplay="auto"
                       />
                   </Grid>
                   <Grid item>

@@ -9,7 +9,7 @@ SWITCH_NAME = "USB0::0x0957::0x3D18::MY60260004::INSTR"
 
 class Controller:
     def __init__(self, debug: bool):
-        self.stimulator = Stimulator(debug)
+        # self.stimulator = Stimulator(debug)
         self.switch = Switch(debug)
 
 
@@ -17,14 +17,15 @@ class Stimulator:
     def __init__(self, debug: bool):
         if not debug:
             # self.port_name = "/dev/tty.usbserial-14410"
-            self.port_name = "COM4"
+            self.port_name = "COM15"
             self.rehamove = Rehamove(self.port_name)
             i = 0
             while self.rehamove.rehamove is None:
-                self.rehamove = Rehamove(f"COM{i}")
+                # self.rehamove = Rehamove(f"COM{i}")
+                self.rehamove = Rehamove(f"COM{15}")
                 time.sleep(0.5)
                 i += 1
-                if i == 10:
+                if i == 16:
                     i = 0
             self.stimulator_mode = 0  # low level
             self.rehamove.change_mode(self.stimulator_mode)
@@ -115,7 +116,8 @@ def stimulator_mid_pulse_timed(data):
 @sio.event
 def switch_button(data):
     data = json.loads(data[0])
-    gate = f"{int(data['button'][0])+1}0{int(data['button'][2])+1}"
+    # gate = f"{int(data['button'][0])+1}0{int(data['button'][2])+1}"
+    gate = f"30{int(data['button'][2])+1}"
     print('button', data['button'], data['state'], gate)
     if data['state'] == 1:
         CONTROLLER.switch.close_gate(gate)

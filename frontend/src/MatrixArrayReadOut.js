@@ -40,7 +40,7 @@ export default function NestedGrid(props) {
     let dict = {};
     for (let y = 0; y < props.rowNumb; y++) {
       for (let x = 0; x < props.columnNumb; x++) {
-        let key = `${y}:${x}`;
+        let key = `${x}:${y}`;
         dict[key] = 0;
       }
     }
@@ -58,19 +58,9 @@ export default function NestedGrid(props) {
         }
       });
     }
-    const key = `${x}:${y}`;
-    // console.log(arrayDict);
+    const key = `${y}:${x}`;
     let newState;
     setArrayDict((prevState) => {
-      // switch (arrayDict[key]) {
-      //   case 0:
-      //   case 1:
-      //     newState= arrayDict[key]++;
-      //     break;
-      //   case 2:
-      //     newState = 0;
-      //     break;
-      // }
       if (arrayDict[key] === 0) {
         newState = 1
       } else {
@@ -79,7 +69,7 @@ export default function NestedGrid(props) {
 
       return { ...prevState, [key]: newState };
     });
-    console.log(`${x}:${y} -> ${newState}`);
+    console.log(`${y}:${x} -> ${newState}`);
     const data = {
       button: key,
       state: newState
@@ -88,21 +78,21 @@ export default function NestedGrid(props) {
   };
 
   const buttonTheme = createMuiTheme({
-    palette: { primary: grey, secondary: green, tertiary: red}
+    palette: { primary: grey, secondary: green, }
   });
 
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
         {columnNumb.map((y) => (
-          <Grid container item xs={12} spacing={3}>
+          <Grid container item xs={12} spacing={1}>
             {rowNumb.map((x) => (
-              <Grid item xs={2}>
+              <Grid item xs={1.5}>
                 <MuiThemeProvider theme={buttonTheme}>
                   <Button
                     variant="contained"
                     onClick={() => updateMatrix(x, y)}
-                    color={arrayDict[`${x}:${y}`] ? "secondary" : "primary"}
+                    color={arrayDict[`${y}:${x}`] ? "secondary" : "primary"}
                   >
                     {x}:{y}
                   </Button>

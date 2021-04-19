@@ -29,7 +29,7 @@ export default class App extends React.Component {
             <div className="App">
                 <SocketContext.Provider value={socket}>
                     <ControlPanel/>
-                    <MatrixArrayReadOut rowNumb={4} columnNumb={4}/>
+                    <MatrixArrayReadOut rowNumb={8} columnNumb={1}/>
                 </SocketContext.Provider>
             </div>
         );
