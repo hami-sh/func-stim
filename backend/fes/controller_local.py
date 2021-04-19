@@ -4,26 +4,28 @@ import json
 import pyvisa
 from rehamove import *
 
-SWITCH_NAME = "USB0::0x0957::0x3D18::MY60260004::0::INSTR"
+SWITCH_NAME = "USB0::0x0957::0x3D18::MY60260004::INSTR"
 
 
 class Controller:
     def __init__(self, debug: bool):
+        self.stimulator = Stimulator(debug)
         self.switch = Switch(debug)
-        # self.stimulator = Stimulator(debug)
 
 
 class Stimulator:
     def __init__(self, debug: bool):
         if not debug:
             # self.port_name = "/dev/tty.usbserial-14410"
-            self.port_name = "COM1"
+            self.port_name = "COM4"
             self.rehamove = Rehamove(self.port_name)
             i = 0
             while self.rehamove.rehamove is None:
                 self.rehamove = Rehamove(f"COM{i}")
                 time.sleep(0.5)
                 i += 1
+                if i == 10:
+                    i = 0
             self.stimulator_mode = 0  # low level
             self.rehamove.change_mode(self.stimulator_mode)
         else:
@@ -35,6 +37,7 @@ class Switch:
         self.debug = debug
         rm = pyvisa.ResourceManager()
         resources = rm.list_resources()
+        print(resources)
         if not debug:
             if SWITCH_NAME not in resources:
                 print("switch not present")

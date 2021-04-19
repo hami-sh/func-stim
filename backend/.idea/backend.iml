@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/fes" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv3.7" />
+      <excludeFolder url="file://$MODULE_DIR$/venv3" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (backend)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

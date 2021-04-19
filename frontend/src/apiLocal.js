@@ -7,7 +7,7 @@ const io = require("socket.io")(8000, {
     }
 });
 // const socketIOClient = require("socket.io-client");
-console.log("started");
+console.log("started on port 8000");
 
 // const socket = socketIOClient(ENDPOINT);
 
