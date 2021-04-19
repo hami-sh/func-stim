@@ -94,7 +94,7 @@ export default function ControlPanel(props) {
                 <VariableReadOut
                   label={"Current (mA)"}
                   step={1}
-                  initial={20}
+                  initial={5}
                   min={1}
                   max={30}
                   icon={<OfflineBoltIcon />}
