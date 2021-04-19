@@ -1,49 +1,59 @@
-// Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
-let projectId = "fes-pub-sub";
-const pubsub = new PubSub({projectId});
-
-module.exports = {
-    publishMessage: async function(topicName, data) {
-        // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
-        const dataBuffer = Buffer.from(JSON.stringify(data));
-
-        try {
-            const messageId = await pubsub.topic(topicName).publish(dataBuffer);
-            console.log(`${messageId} SENT ${dataBuffer} ON ${topicName}`);
-        } catch (error) {
-            console.error(`Received error while publishing: ${error.message}`);
-            process.exitCode = 1;
-        }
+const io = require("socket.io")(8000, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
     }
-}
-//
-// async function quickstart(
-//     projectId = 'fes-pub-sub', // Your Google Cloud Platform project ID
-//     topicName = 'my-topic', // Name for the new topic to create
-//     subscriptionName = 'my-sub' // Name for the new subscription to create
-// ) {
-    // Instantiates a client
+});
+// const socketIOClient = require("socket.io-client");
+console.log("started on port 8000");
 
-    // Creates a new topic
-    // const [topic] = await pubsub.createTopic(topicName);
-    // console.log(`Topic ${topic.name} created.`);
+// const socket = socketIOClient(ENDPOINT);
 
-    // Creates a subscription on that new topic
-    // const [subscription] = await topic.createSubscription(subscriptionName);
+io.on("connection", socket => {
+    // handle the event sent with socket.send()
+    console.log("New client connected");
 
-    // Receive callbacks for new messages on the subscription
-    // subscription.on('message', message => {
-    //     console.log('Received message:', message.data.toString());
-    //     process.exit(0);
-    // });
+    socket.onAny((event, ...args) => {
+        console.log(`event: ${event} | args: ${args}`);
+        if (event !== "connect") {
+            console.log("sending...");
+            io.sockets.emit(event, args);
+        }
+    });
 
-    // Receive callbacks for errors on the subscription
-    // subscription.on('error', error => {
-    //     console.error('Received error:', error);
-    //     process.exit(1);
-    // });
+    let change_mode = {
+        mode: 0
+    }
+    // socket.emit("stimulator_change_mode", JSON.stringify(change_mode));
+    //
+    // change_mode = {
+    //     mode: 1
+    // }
+    // socket.emit("stimulator_change_mode", JSON.stringify(change_mode));
+    //
+    // let low_pulse = {
+    //     channel: 0,
+    //     current: 10,
+    //     pulse_width: 10
+    // }
+    // socket.emit("stimulator_low_pulse", JSON.stringify(low_pulse));
+    //
+    // let mid_pulse = {
+    //     channel: 0,
+    //     current: 10,
+    //     pulse_width: 10,
+    //     period: 10,
+    //     ms: 10
+    // }
+    // socket.emit("stimulator_mid_pulse_timed", JSON.stringify(mid_pulse));
+    //
+    // let switch_button = {
+    //     button: "3,0",
+    //     status: "pos"
+    // }
+    // socket.emit("switch", JSON.stringify(switch_button));
 
-    // Send a message to the topic
-    // topic.publish(Buffer.from('Test message!'));
-// }
+    // socket.disconnect();
+});
