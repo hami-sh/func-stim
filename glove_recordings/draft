@@ -1,0 +1,33 @@
+for axis in ['x', 'z', 'y', 'w']:
+
+            if axis not in values[bone].keys():
+                values[bone][axis] = list()
+
+            preivous_keyframe = None
+            for keyframe in self.bone_keyframes[bone]:
+                if preivous_keyframe is None:
+                    values[bone][axis].append(keyframe['rotation'][i])
+                else:
+                    if keyframe['keytime'] - preivous_keyframe['keytime'] > self.delta_keytime:
+
+
+for axis in ['x', 'z', 'y', 'w']:
+
+            if axis not in values[bone].keys():
+                values[bone][axis] = dict()
+                values[bone][axis]['keytimes'] = list()
+                values[bone][axis]['values'] = list()
+
+            for keyframe in self.bone_keyframes[bone]:
+                values[bone][axis]['keytimes'].append(keyframe['keytime'])
+                values[bone][axis]['values'].append(keyframe['rotation'][i])
+
+
+            i += 1
+            if i == 4:
+                i = 0
+
+    plt.plot(values[bone]['x']['keytimes'], values[bone]['x']['values'], linestyle='-', color='black')
+            plt.plot(values[bone]['y']['keytimes'], values[bone]['y']['values'], linestyle='-', color='red')
+            plt.plot(values[bone]['z']['keytimes'], values[bone]['z']['values'], linestyle='-', color='blue')
+            plt.plot(values[bone]['w']['keytimes'], values[bone]['w']['values'], linestyle='-', color='green')
