@@ -116,13 +116,26 @@ def stimulator_mid_pulse_timed(data):
 @sio.event
 def switch_button(data):
     data = json.loads(data[0])
-    # gate = f"{int(data['button'][0])+1}0{int(data['button'][2])+1}"
-    gate = f"30{int(data['button'][2])+1}"
-    print('button', data['button'], data['state'], gate)
-    if data['state'] == 1:
-        CONTROLLER.switch.close_gate(gate)
+    # # gate = f"{int(data['button'][0])+1}0{int(data['button'][2])+1}"
+    # gate = f"30{int(data['button'][2])+1}"
+    # print('button', data['button'], data['state'], gate)
+    gate = None
+    if str.isdigit(data['button']):
+        col = int(data['button'])
+        # therefore number
+        gate = f"30{col}"
     else:
-        CONTROLLER.switch.open_gate(gate)
+        # therefore reference
+        if data['button'] == "X":
+            gate = f"201"
+        elif data['button'] == "Y":
+            gate = f"202"
+    print('button', data['button'], gate)
+    if not DEBUG:
+        if data['state'] == 1:
+            CONTROLLER.switch.close_gate(gate)
+        else:
+            CONTROLLER.switch.open_gate(gate)
 
 @sio.event
 def disconnect():
