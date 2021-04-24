@@ -49,7 +49,8 @@ export default function NestedGrid(props) {
 
   const [arrayDict, setArrayDict] = React.useState(instantiateMatrix());
 
-  const updateMatrix = (x, y) => {
+  const updateMatrix = (x, y, e) => {
+    console.log(e.target.innerText);
     if (socket == null) {
       socket = io(ENDPOINT, {
         withCredentials: true,
@@ -71,7 +72,8 @@ export default function NestedGrid(props) {
     });
     console.log(`${y}:${x} -> ${newState}`);
     const data = {
-      button: key,
+      // button: key,
+      button: e.target.innerText,
       state: newState
     }
     socket.emit("switch_button", JSON.stringify(data));
@@ -80,6 +82,46 @@ export default function NestedGrid(props) {
   const buttonTheme = createMuiTheme({
     palette: { primary: grey, secondary: green, }
   });
+
+  const naming = (key) => {
+    let label = "empty";
+    switch(key) {
+      case "0:0":
+        label = "1";
+        break;
+      case "1:0":
+        label = "2";
+        break;
+      case "0:1":
+        label = "3";
+        break;
+      case "1:1":
+        label = "4";
+        break;
+      case "0:2":
+        label = "5";
+        break;
+      case "1:2":
+        label = "6";
+        break;
+      case "0:3":
+        label = "7";
+        break;
+      case "1:3":
+        label = "8";
+        break;
+      case "0:4":
+        label = "x";
+        break;
+      case "1:4":
+        label = "y";
+        break;
+      default:
+        label = key;
+        break;
+    }
+    return label;
+  }
 
   return (
     <div className={classes.root}>
@@ -91,10 +133,10 @@ export default function NestedGrid(props) {
                 <MuiThemeProvider theme={buttonTheme}>
                   <Button
                     variant="contained"
-                    onClick={() => updateMatrix(x, y)}
+                    onClick={(e) => updateMatrix(x, y, e)}
                     color={arrayDict[`${y}:${x}`] ? "secondary" : "primary"}
                   >
-                    {x}:{y}
+                    {naming(`${x}:${y}`)}
                   </Button>
                 </MuiThemeProvider>
               </Grid>

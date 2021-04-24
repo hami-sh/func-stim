@@ -125,7 +125,7 @@ export default function ControlPanel(props) {
                       step={1000}
                       initial={1000}
                       min={1000}
-                      max={20000}
+                      max={40000}
                       icon={<AccessTimeIcon />}
                       ref={totalRuntimeRef}
                     />
