@@ -114,3 +114,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+backend/venv3.8
+backend/.idea
+backend/.idea
+glove_recordings/.idea
+glove_recordings/venv
+.DS_Store
